@@ -5,9 +5,9 @@
 set -e
 
 # Configuration - Change the server URL to your own deployment
-SERVER_URL="http://localhost:3000"
+SERVER_URL="https://tshare.porgy-ruler.ts.net"
 DEFAULT_SYNTAX="bash" # Default syntax highlighting
-CLIPBOARD_CMD="xclip -selection clipboard" # Use pbcopy on macOS
+CLIPBOARD_CMD="wl-copy" # Use pbcopy on macOS
 
 # Check for macOS
 if [[ "$(uname)" == "Darwin" ]]; then
