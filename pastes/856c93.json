@@ -1,0 +1,8 @@
+{
+  "content": "total 11M\ndrwxr-xr-x 1 mr users  344 Apr 14 00:20 .\ndrwxr-xr-x 1 mr users  876 Apr 13 21:17 ..\n-rw-r--r-- 1 mr users  338 Apr 13 18:20 clone-repo.sh\n-rw-r--r-- 1 mr users  875 Apr 13 18:20 compose.yaml\n-rwxr-xr-x 1 mr users 5.1M Apr 13 18:20 deployer\n-rw-r--r-- 1 mr users  678 Apr 13 18:20 Dockerfile\n-rw-r--r-- 1 mr users   97 Apr 13 18:20 .dockerignore\n-rw-r--r-- 1 mr users  609 Apr 13 18:20 entrypoint.sh\n-rw-r--r-- 1 mr users  246 Apr 14 00:25 .env\n-rw-r--r-- 1 mr users  479 Apr 13 18:20 env-example\ndrwxr-xr-x 1 mr users  182 Apr 14 00:25 .git\n-rw-r--r-- 1 mr users  480 Apr 13 18:20 .gitignore\ndrwxr-xr-x 1 mr users    0 Apr 13 18:20 mongo-dump\n-rw-r--r-- 1 mr users  211 Apr 13 18:20 next-env.d.ts\n-rw-r--r-- 1 mr users 112K Apr 13 18:20 pnpm-lock.yaml\n-rw-r--r-- 1 mr users 4.0K Apr 13 18:20 README.md\n-rwxr-xr-x 1 mr users 5.1M Apr 13 18:20 test\ndrwxr-xr-x 1 mr users   18 Apr 13 18:20 test-dump\n-rwxr-xr-x 1 mr users   14 Apr 14 00:20 tshare\ndrwxr-xr-x 1 mr users   38 Apr 13 18:20 workflows",
+  "command": "ls -lah",
+  "hostname": "dolores",
+  "workingDir": "/home/mr/Repos/docker-starter",
+  "syntax": "bash",
+  "timestamp": "2025-04-13T22:25:28.313Z"
+}

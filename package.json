@@ -1,0 +1,17 @@
+{
+  "name": "terminal-share-server",
+  "version": "1.0.0",
+  "description": "A server for sharing terminal output with syntax highlighting",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "nodemon server.js"
+  },
+  "dependencies": {
+    "body-parser": "^1.20.2",
+    "express": "^4.18.2"
+  },
+  "devDependencies": {
+    "nodemon": "^3.0.1"
+  }
+}

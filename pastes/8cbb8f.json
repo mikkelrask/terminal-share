@@ -1,0 +1,8 @@
+{
+  "content": "Default configuration file created at: /home/mr/.config/spotify-to-local/config.ini\nPlease edit this file to add your Spotify Client ID and Secret.\nGet credentials from: https://developer.spotify.com/dashboard/\nSet Redirect URI in Spotify App settings to: http://localhost:8888/callback",
+  "command": "uv run spotify-to-local_caching_and_indexing.py --init",
+  "hostname": "dolores",
+  "workingDir": "/home/mr/Repos/spotify-exporter",
+  "syntax": "python",
+  "timestamp": "2025-04-13T20:09:50.026Z"
+}
