@@ -5,7 +5,7 @@
 set -e
 
 # Configuration - Change the server URL to your own deployment
-SERVER_URL="http://localhost:3002"
+SERVER_URL="https://tshare.porgy-ruler.ts.net"
 DEFAULT_SYNTAX="bash" # Default syntax highlighting
 CLIPBOARD_CMD="wl-copy" # Use pbcopy on macOS
 
