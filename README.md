@@ -45,6 +45,9 @@ Once the command completes, tshare will:
 - **Just works** - No accounts, no configuration, no hassle
 - **Quiet mode** - When you only need the share link without seeing the command output
 
+### Want to host your own server?
+Read [this post](https://mikkelrask.github.io) on [my blog](#) for all the details on how to run the server on your own machine/server and how to get it up and running 100% locally.
+
 ## Requirements 🧰
 
 - Bash shell
