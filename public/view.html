@@ -6,9 +6,27 @@
   <title>tshare - Terminal Output</title>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/styles/tokyo-night-dark.min.css" id="highlight-theme">
   <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/highlight.min.js"></script>
+  <!-- Core languages -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/languages/bash.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/languages/shell.min.js"></script>
+  <!-- Additional popular languages -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/languages/python.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/languages/javascript.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/languages/typescript.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/languages/go.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/languages/ruby.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/languages/php.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/languages/java.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/languages/rust.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/languages/csharp.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/languages/cpp.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/languages/yaml.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/languages/json.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/languages/xml.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/languages/sql.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/languages/dockerfile.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/languages/markdown.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/languages/powershell.min.js"></script>
   <link rel="stylesheet" href="styles.css">
   <style>
     body {
@@ -99,6 +117,32 @@
     @keyframes spin {
       to { transform: rotate(360deg); }
     }
+
+    .syntax-badge {
+      background-color: var(--accent-color);
+      color: white;
+      padding: 0.2rem 0.5rem;
+      border-radius: 4px;
+      font-size: 0.8rem;
+      margin-left: 0.75rem;
+    }
+    
+    @media (max-width: 768px) {
+      .terminal-header {
+        flex-direction: column;
+        gap: 0.75rem;
+        align-items: flex-start;
+      }
+      
+      .terminal-info {
+        width: 100%;
+        overflow-x: auto;
+      }
+      
+      .theme-selector {
+        width: 100%;
+      }
+    }
   </style>
 </head>
 <body>
@@ -114,6 +158,7 @@
         <span class="user-host" id="user-host">user@host</span>
         <span class="working-dir" id="working-dir">~/path</span>
         <span class="command" id="command">$ command</span>
+        <span class="syntax-badge" id="syntax-badge">bash</span>
       </div>
       <select id="theme-selector" class="theme-selector">
         <option value="atom-one-dark">Atom One Dark</option>
@@ -123,7 +168,7 @@
         <option value="monokai">Monokai</option>
         <option value="dracula">Dracula</option>
         <option value="nord">Nord</option>
-        <option value="tokyo-night-dark">Tokyo Night</option>
+        <option value="tokyo-night-dark" selected>Tokyo Night</option>
         <option value="vs2015">VS 2015</option>
       </select>
     </div>
@@ -154,11 +199,18 @@
           
           const outputEl = document.getElementById('output');
           outputEl.textContent = data.content;
-          outputEl.className = data.syntax || 'bash';
+          
+          // Set the syntax highlighting class, default to bash if not specified
+          const syntax = data.syntax || 'bash';
+          outputEl.className = syntax;
+          
+          // Display the detected syntax in the badge
+          document.getElementById('syntax-badge').textContent = syntax;
           
           const date = new Date(data.timestamp);
           document.getElementById('timestamp').textContent = `Created: ${date.toLocaleString()}`;
           
+          // Apply syntax highlighting
           hljs.highlightElement(outputEl);
           
           document.getElementById('loading').style.display = 'none';
