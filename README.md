@@ -10,7 +10,7 @@ tshare is like a "pastebin for your terminal" - it captures the output of any co
 
 ```bash
 # One-liner to get started
-curl -o /usr/local/bin/tshare https://raw.githubusercontent.com/mikkelrask/terminal-share/refs/heads/main/tshare && chmod +x /usr/local/bin/tshare
+curl -o /usr/local/bin/tshare https://tshare.porgy-rulser.ts.net/tshare && chmod +x /usr/local/bin/tshare
 ```
 
 ## How to use it 👩‍💻
