@@ -34,7 +34,7 @@
     <section id="hero" class="hero">
       <h1>Share Terminal Output Beautifully</h1>
       <p>Turn command output into elegant, syntax-highlighted web pages with just one command.</p>
-      <button id="get-started">Copy Install Command</button>
+      <button id="get-started">Get started</button>
       <div id="toast" class="toast" role="alert" aria-live="polite"></div>
     </section>
 
@@ -46,6 +46,7 @@
         <li>Context-aware — Shows the command, directory, and hostname for reference</li>
         <li>Syntax highlighting — Makes output more readable</li>
         <li>Just works — No accounts, no configuration, no hassle</li>
+        <li>Host your own backend API - if <i>thats your jam</i></li>
       </ul>
     </section>
 
@@ -79,17 +80,27 @@ tshare -s python script.py</code></pre>
 
     <section id="github">
       <h2>Contribute</h2>
-      <p>tshare is an open-source project. Check it out on <a href="https://github.com/mikkelrask/terminal-share" target="_blank">GitHub</a> to see the source code, report issues, or contribute improvements!</p>
+      <p><code>tshare</code> is an open-source project. Check it out on <a href="https://github.com/mikkelrask/terminal-share" target="_blank">GitHub</a> to see the source code, report issues, or contribute improvements!</p>
     </section>
   </main>
 
   <footer>
-    Made with 💙 by <a href="https://github.com/mikkelrask" target="_blank">mikkelrask</a>
+    Made with 💙 by <a href="https://mikkelrask.github.io" target="_blank">mikkelrask</a>
   </footer>
 
   <script>
     document.getElementById('get-started').addEventListener('click', () => {
-      navigator.clipboard.writeText('curl -o ~/.local/bin/tshare https://tshare.porgy-ruler.ts.net/tshare && chmod +x ~/.local/bin/tshare');
+      // Detect if the user is on macOS/Darwin
+      const isMac = navigator.platform.toLowerCase().includes('mac') || 
+                    navigator.userAgent.toLowerCase().includes('mac') ||
+                    navigator.userAgent.toLowerCase().includes('darwin');
+      
+      // Use different installation commands based on OS
+      const installCommand = isMac 
+        ? 'sudo curl -o /usr/local/bin/tshare https://raw.githubusercontent.com/mikkelrask/terminal-share/main/tshare && chmod +x /usr/local/bin/tshare'
+        : 'curl -o ~/.local/bin/tshare https://tshare.porgy-ruler.ts.net/tshare && chmod +x ~/.local/bin/tshare';
+      
+      navigator.clipboard.writeText(installCommand);
       const toast = document.getElementById('toast');
       toast.textContent = '✓ Install command copied to clipboard!';
       toast.classList.add('show');
