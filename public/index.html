@@ -97,7 +97,7 @@ tshare -s python script.py</code></pre>
       
       // Use different installation commands based on OS
       const installCommand = isMac 
-        ? 'sudo curl -o /usr/local/bin/tshare https://raw.githubusercontent.com/mikkelrask/terminal-share/main/tshare && chmod +x /usr/local/bin/tshare'
+        ? 'sudo curl -o /usr/local/bin/tshare https://raw.githubusercontent.com/mikkelrask/terminal-share/main/tshare && sudo chmod +x /usr/local/bin/tshare'
         : 'curl -o ~/.local/bin/tshare https://tshare.porgy-ruler.ts.net/tshare && chmod +x ~/.local/bin/tshare';
       
       navigator.clipboard.writeText(installCommand);
