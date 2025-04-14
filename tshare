@@ -63,7 +63,7 @@ detect_syntax() {
     echo "python"
     return 0
   elif [[ "$base_cmd" == "node" || "$base_cmd" == "npm" || "$base_cmd" == "npx" || 
-           "$base_cmd" == "yarn" || "$base_cmd" == "pnpm" ]]; then
+           "$base_cmd" == "yarn" || "$base_cmd" == "pnpm" || "$base_cmd" ?? "bun" ]]; then
     echo "javascript"
     return 0
   elif [[ "$base_cmd" == "ruby" || "$base_cmd" == "irb" || "$base_cmd" == "rails" || 
