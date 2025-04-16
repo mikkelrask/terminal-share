@@ -50,6 +50,7 @@ body {
   color: var(--text-color);
   font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
   line-height: 1.6;
+  #font-family: 'Fira Code';
   transition: background-color 0.3s ease;
 }
 
@@ -64,6 +65,7 @@ h1, h2, h3 {
   font-weight: 700;
   margin-bottom: 1.5rem;
   line-height: 1.2;
+  font-family: 'Fira Code'
 }
 
 h1 {
@@ -103,7 +105,7 @@ a:hover {
 .sticky-header {
   position: sticky;
   top: 0;
-  background-color: rgba(var(--bg-color-rgb), 0.9); /* 0.9 opacity for blur effect */
+  background-color: rgba(var(--bg-color-rgb), 0.7); /* 0.9 opacity for blur effect */
   backdrop-filter: blur(8px);
   -webkit-backdrop-filter: blur(8px);
   border-bottom: 1px solid var(--border-color);
@@ -193,7 +195,7 @@ nav a:hover::after {
 }
 
 /* Button */
-button {
+button.primary {
   background-color: var(--accent-color);
   color: white;
   border: none;
@@ -206,17 +208,36 @@ button {
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 
+button.secondary {
+  background-color: var(--card-bg);
+  color: white;
+  border: none;
+  padding: 0.75rem 1.5rem;
+  margin-left:1rem;
+  border-radius: 6px;
+  font-weight: 500;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background-color 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
 button:hover {
-  background-color: var(--accent-hover);
   transform: translateY(-2px);
   box-shadow: 0 6px 10px rgba(0, 0, 0, 0.15);
+}
+
+.primary:hover {
+  background-color: var(--success-color);
+}
+.secondary:hover {
+  background-color: var(--code-bg);
 }
 
 button:active {
   transform: translateY(0);
 }
 
-/* Toast */
 .toast {
   position: fixed;
   bottom: 2rem;
@@ -231,6 +252,7 @@ button:active {
   visibility: hidden;
   transition: opacity 0.3s ease, visibility 0.3s ease, transform 0.3s ease;
   z-index: 1000;
+  font-weight:bold;
 }
 
 .toast.show {

@@ -32,10 +32,11 @@
 
   <main>
     <section id="hero" class="hero">
-      <h1>Share Terminal Output Beautifully</h1>
+      <h1>Share Your Terminal Output Beautifully</h1>
       <p>Turn command output into elegant, syntax-highlighted web pages with just one command.</p>
-      <button id="get-started">Get started</button>
-      <div id="toast" class="toast" role="alert" aria-live="polite"></div>
+      <button id="copy-cmd" class="primary">Copy install command</button>
+      <a href="#why"><button class="secondary">Learn more</button></a>
+      <div id="toast" class="toast" role="info" aria-live="angry"></div>
     </section>
 
     <section id="why" class="why">
@@ -55,6 +56,7 @@
       <p>Download the client script and make it executable:</p>
       <pre><code>curl -o /usr/local/bin/tshare https://raw.githubusercontent.com/mikkelrask/terminal-share/main/tshare
 chmod +x /usr/local/bin/tshare</code></pre>
+      <p><small>note: If you get an error, you might need to prefix the commands with 'sudo' or similar to elevate your priveliges</small></p>
       <p>Then, simply prefix any command with <code>tshare</code> to share its output:</p>
       <pre><code>tshare ls -la
 tshare -s python script.py</code></pre>
@@ -89,7 +91,7 @@ tshare -s python script.py</code></pre>
   </footer>
 
   <script>
-    document.getElementById('get-started').addEventListener('click', () => {
+    document.getElementById('copy-cmd').addEventListener('click', () => {
       // Detect if the user is on macOS/Darwin
       const isMac = navigator.platform.toLowerCase().includes('mac') || 
                     navigator.userAgent.toLowerCase().includes('mac') ||
@@ -102,9 +104,9 @@ tshare -s python script.py</code></pre>
       
       navigator.clipboard.writeText(installCommand);
       const toast = document.getElementById('toast');
-      toast.textContent = '✓ Install command copied to clipboard!';
+      toast.textContent = '✓ Install command copied to clipboard - now paste it in your teminal!';
       toast.classList.add('show');
-      setTimeout(() => toast.classList.remove('show'), 3000);
+      setTimeout(() => toast.classList.remove('show'), 8000);
     });
 
     document.getElementById('theme-toggle').addEventListener('click', () => {

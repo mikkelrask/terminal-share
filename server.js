@@ -7,8 +7,6 @@ const fs = require('fs');
 const app = express();
 const PORT = process.env.PORT || 3000;
 
-// Storage for our pastes
-// In production, you'd want to use a proper database
 const STORAGE_DIR = path.join(__dirname, 'pastes');
 if (!fs.existsSync(STORAGE_DIR)) {
   fs.mkdirSync(STORAGE_DIR, { recursive: true });
@@ -18,7 +16,7 @@ if (!fs.existsSync(STORAGE_DIR)) {
 app.use(bodyParser.json({ limit: '10mb' }));
 app.use(express.static(path.join(__dirname, 'public')));
 
-// Generate a random ID for new pastes
+// Generate a random ID for new pastas
 function generateId(length = 6) {
   return crypto.randomBytes(Math.ceil(length / 2))
     .toString('hex')
@@ -31,7 +29,8 @@ app.post('/api/paste', (req, res) => {
     const { content, command, hostname, workingDir, syntax } = req.body;
 
     if (!content) {
-      return res.status(400).json({ error: 'Content is required' });
+      console.log('[ERR] No content was able to be uploaded')
+      return res.status(400).json({ error: 'Content could not be uploaded' });
     }
 
     // Generate a unique ID
@@ -71,14 +70,16 @@ app.get('/api/paste/:id', (req, res) => {
   const filePath = path.join(STORAGE_DIR, `${id}.json`);
 
   if (!fs.existsSync(filePath)) {
-    return res.status(404).json({ error: 'Paste not found' });
+    console.log(`[WARN] Starring blank into the void - { id: '${id}' } is a 404!`)
+    return res.status(404).json({ error: `Paste ${id} not found` });
   }
 
   try {
     const pasteData = JSON.parse(fs.readFileSync(filePath, 'utf-8'));
     res.json(pasteData);
+    console.log('[INFO] Success - fetched paste: ', { id })
   } catch (error) {
-    console.error('Error retrieving paste:', error);
+    console.error('[ERR] Error retrieving paste:', error);
     res.status(500).json({ error: 'Failed to retrieve paste' });
   }
 });
@@ -90,5 +91,6 @@ app.get('/:id', (req, res) => {
 
 // Start the server
 app.listen(PORT, () => {
-  console.log(`Terminal Share server running on port ${PORT}`);
+  console.log(`[INFO] tshare server running on port ${PORT}\n[INFO] Waiting for requests`);
 });
+
