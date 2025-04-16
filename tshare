@@ -13,6 +13,10 @@ if [[ "$(uname)" == "Darwin" ]]; then
   CLIPBOARD_CMD="pbcopy"
 fi
 
+if [[ "$XDG_SESSION_TYPE" == "x11" ]]; then
+  CLIPBOARD_CMD="xclip -sel clip"
+fi
+
 # Function to show help
 show_help() {
   echo "tshare - Terminal output sharing utility"
@@ -281,7 +285,7 @@ upload_and_show_url() {
       fi
     else
       if [[ "$QUIET" != "true" ]]; then
-        echo "Clipboard command failed or not available"
+        echo "Clipboard command ($CLIPBOARD_CMD) failed or not available"
       fi
     fi
   fi
