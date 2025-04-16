@@ -44,15 +44,13 @@ Once the command completes, tshare will:
 - **Syntax highlighting** - Makes output more readable
 - **Just works** - No accounts, no configuration, no hassle
 - **Quiet mode** - When you only need the share link without seeing the command output
-
-### Want to host your own server?
-Read [this post](https://mikkelrask.github.io) on [my blog](#) for all the details on how to run the server on your own machine/server and how to get it up and running 100% locally.
+- **Self hostable** - _Bring your own infrastructure_ for more privacy i.e in a work environment
 
 ## Requirements 🧰
 
 - Bash shell
 - cURL for HTTPS requests
-- Optional: `xclip` (Linux) or `pbcopy` (macOS) for automatic clipboard copying
+- Optional: `xclip` (Linux X11), `wl-copy` (Linux Wayland) or `pbcopy` (macOS) for automatic clipboard copying
 
 ## License 📄
 
@@ -65,4 +63,3 @@ Issues and PRs welcome at [github.com/mikkelrask/terminal-share](https://github.
 ---
 
 Made with 💙 by [mikkelrask](https://github.com/mikkelrask)
-

@@ -234,7 +234,7 @@ upload_and_show_url() {
   
   # Upload to the server
   if [[ "$QUIET" != "true" ]]; then
-    echo "Uploading output..."
+    echo "Handling output... (Press 'CTRL+C' to cancel..)"
   fi
   
   if command -v curl &> /dev/null; then
