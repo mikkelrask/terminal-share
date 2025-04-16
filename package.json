@@ -1,5 +1,5 @@
 {
-  "name": "terminal-share-server",
+  "name": "tshare-server",
   "version": "1.0.0",
   "description": "A server for sharing terminal output with syntax highlighting",
   "main": "server.js",
