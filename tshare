@@ -6,16 +6,38 @@ set -e
 
 SERVER_URL="https://tshare.porgy-ruler.ts.net"
 DEFAULT_SYNTAX="bash" 
-CLIPBOARD_CMD="wl-copy" # Use xclip if you are x11
 
-# Check for macOS
-if [[ "$(uname)" == "Darwin" ]]; then
-  CLIPBOARD_CMD="pbcopy"
+# Check for SSH session
+if [[ -n "$SSH_CLIENT" || -n "$SSH_TTY" ]]; then
+  IS_SSH=true
+else
+  IS_SSH=false
 fi
 
-if [[ "$XDG_SESSION_TYPE" == "x11" ]]; then
-  CLIPBOARD_CMD="xclip -sel clip"
-fi
+# Function to copy to clipboard with fallbacks
+copy_to_clipboard() {
+  local url="$1"
+  
+  if [[ "$IS_SSH" == "true" ]]; then
+    # Try OSC 52 escape sequence first
+    printf "\e]52;c;$(printf %s "$url" | base64)\a"
+    # Provide manual copy instructions
+    echo "Remote session detected. You can manually copy the URL above."
+    return 0
+  fi
+  
+  # Local clipboard handling
+  if [[ "$(uname)" == "Darwin" ]]; then
+    printf "%s" "$url" | pbcopy
+  elif [[ "$XDG_SESSION_TYPE" == "x11" ]]; then
+    printf "%s" "$url" | xclip -sel clip
+  elif command -v wl-copy &> /dev/null; then
+    printf "%s" "$url" | wl-copy
+  else
+    echo "No clipboard utility found. Please copy the URL manually."
+    return 1
+  fi
+}
 
 # Function to show help
 show_help() {
@@ -24,7 +46,7 @@ show_help() {
   echo
   echo "Options:"
   echo "  -h, --help            Show this help message"
-  echo "  -s, --syntax SYNTAX   Specify syntax highlighting (default: auto-detected)"
+  echo "  -s, --syntax SYNTAX   Specify syntax highlighting (-s none for no highlighting)"
   echo "  -n, --no-clipboard    Don't copy URL to clipboard"
   echo "  -q, --quiet           Suppress command output (only show URL)"
   echo "  -u, --url URL         Specify server URL (default: $SERVER_URL)"
@@ -279,13 +301,13 @@ upload_and_show_url() {
   
   # Copy to clipboard if available
   if [[ "$USE_CLIPBOARD" == "true" ]]; then
-    if eval "$CLIPBOARD_CMD" <<< "$URL" 2>/dev/null; then
+    if copy_to_clipboard "$URL"; then
       if [[ "$QUIET" != "true" ]]; then
         echo "URL copied to clipboard"
       fi
     else
       if [[ "$QUIET" != "true" ]]; then
-        echo "Clipboard command ($CLIPBOARD_CMD) failed or not available"
+        echo "Could not copy to clipboard"
       fi
     fi
   fi
