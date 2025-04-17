@@ -207,11 +207,13 @@
           // Display the detected syntax in the badge
           document.getElementById('syntax-badge').textContent = syntax;
           
+          // Only apply syntax highlighting if syntax is not 'none'
+          if (syntax !== 'none') {
+            hljs.highlightElement(outputEl);
+          }
+          
           const date = new Date(data.timestamp);
           document.getElementById('timestamp').textContent = `Created: ${date.toLocaleString()}`;
-          
-          // Apply syntax highlighting
-          hljs.highlightElement(outputEl);
           
           document.getElementById('loading').style.display = 'none';
           document.getElementById('content').style.display = 'block';
