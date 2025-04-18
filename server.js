@@ -6,6 +6,7 @@ const fs = require('fs');
 
 const app = express();
 const PORT = process.env.PORT || 3000;
+const VERSION = "1.1.0"; // Add server version
 
 const STORAGE_DIR = path.join(__dirname, 'pastes');
 if (!fs.existsSync(STORAGE_DIR)) {
@@ -57,7 +58,8 @@ app.post('/api/paste', (req, res) => {
 
     res.json({
       id,
-      url: `${req.protocol}://${req.get('host')}/${id}`
+      url: `${req.protocol}://${req.get('host')}/${id}`,
+      serverVersion: VERSION // Include server version in response
     });
   } catch (error) {
     console.error('Error creating paste:', error);
