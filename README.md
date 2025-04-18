@@ -10,7 +10,11 @@ tshare is like a "pastebin for your terminal" - it captures the output of any co
 
 ```bash
 # One-liner to get started
-curl -o /usr/local/bin/tshare https://tshare.porgy-rulser.ts.net/tshare && chmod +x /usr/local/bin/tshare
+curl -o ~/.local/bin/tshare https://tshare.porgy-ruler.ts.net/tshare && chmod +x ~/.local/bin/tshare
+```
+If it errors out about _"No such file or directory"_, your system system probably don't use the `.local` directory, so you can either create the directory with `mkdir -pv ~/.local/bin` and add it to your path with `PATH="/home/your-user-name/.local/bin:$PATH"` or run the alternate install command, however this will require elevated priveliges, like `sudo`.
+```
+sudo curl -o /usr/local/bin/tshare https://tshare.porgy-ruler.ts.net/tshare && sudo chmod /usr/local/bin/tshare
 ```
 
 ## How to use it 👩‍💻
@@ -46,6 +50,9 @@ Once the command completes, tshare will:
 - **Quiet mode** - When you only need the share link without seeing the command output
 - **Self hostable** - _Bring your own infrastructure_ for more privacy i.e in a work environment
 
+### Example output
+[![The tshare source code shown in tshare](https://github.com/mikkelrask/terminal-share/blob/main/img/screenshot.png)](https://tshare.porgy-ruler.ts.net/d60367)
+
 ## Requirements 🧰
 
 - Bash shell
@@ -54,7 +61,7 @@ Once the command completes, tshare will:
 
 ## License 📄
 
-MIT License
+The complete `tshare` project is licensed under the Open Source [BEER-WARE Rev 42 licence](https://github.com/mikkelrask/terminal-share/blob/main/LICENSE)
 
 ## Contributing 🤝
 
@@ -62,4 +69,4 @@ Issues and PRs welcome at [github.com/mikkelrask/terminal-share](https://github.
 
 ---
 
-Made with 💙 by [mikkelrask](https://github.com/mikkelrask)
+Made with 💙 by [mikkelrask](https://mikkelrask.github.io)
