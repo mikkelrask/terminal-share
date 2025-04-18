@@ -5,7 +5,7 @@
 set -e
 
 SERVER_URL="https://tshare.porgy-ruler.ts.net"
-VERSION="1.0.0"
+VERSION="1.1.0"
 DEFAULT_SYNTAX="bash" 
 
 # Check for SSH session
