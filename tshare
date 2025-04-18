@@ -74,7 +74,7 @@ update_script() {
     return 1
   fi
 
-  read -ep "A newer version of tshare is available. Do you want to update? (y/n): " -i "y" update_choice
+  read -ep "Do you want to download the latest version of tshare and install it in your path? (y/n): " -i "y" update_choice
   if [[ "$update_choice" =~ ^[Yy]$ ]]; then
     echo "Updating $script_path..."
     
@@ -83,7 +83,7 @@ update_script() {
       curl --progress-bar -o "$script_path" "$script_url" && chmod +x "$script_path"
       echo "Update complete"
     else
-      echo "Elevated privileges are required to update $script_path."
+      echo "To update $script_path please provide your password for sudo access."
       if command -v sudo &> /dev/null; then
         sudo curl --progress-bar -o "$script_path" "$script_url" && sudo chmod +x "$script_path"
         if [[ $? -eq 0 ]]; then
@@ -96,7 +96,7 @@ update_script() {
       fi
     fi
   else
-    echo "Update skipped - if you experience issues, please reconsider updating with 'tshare -su'."
+    echo "Update skipped - if you experience issues with tshare or its output, please update it with 'tshare -su' or running the install command from the website again manually."
   fi
 }
 
