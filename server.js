@@ -47,6 +47,7 @@ app.post('/api/paste', (req, res) => {
       workingDir: workingDir || '~',
       syntax: syntax || 'bash',
       timestamp: new Date().toISOString(),
+      exitCode: req.body.exitCode || null
     };
 
     fs.writeFileSync(

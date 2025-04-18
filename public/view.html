@@ -28,122 +28,9 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/languages/markdown.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/languages/powershell.min.js"></script>
   <link rel="stylesheet" href="styles.css">
-  <style>
-    body {
-      margin: 0;
-      padding: 0;
-      display: flex;
-      flex-direction: column;
-      min-height: 100vh;
-    }
-    
-    .terminal-header {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 0.75rem 1rem;
-      background-color: var(--code-bg);
-      border-bottom: 1px solid var(--border-color);
-      font-family: 'Fira Code', monospace;
-    }
-    
-    .terminal-info {
-      display: flex;
-      align-items: center;
-      gap: 0.5rem;
-      overflow-x: auto;
-    }
-    
-    .user-host {
-      color: var(--accent-color);
-      font-weight: 500;
-    }
-    
-    .working-dir {
-      color: var(--success-color);
-    }
-    
-    .command {
-      color: var(--text-color);
-    }
-    
-    .theme-selector {
-      background-color: var(--card-bg);
-      color: var(--text-color);
-      border: 1px solid var(--border-color);
-      padding: 0.4rem 0.6rem;
-      border-radius: 4px;
-      font-family: 'Fira Code', monospace;
-      cursor: pointer;
-    }
-    
-    #output {
-      flex-grow: 1;
-      margin: 0;
-      padding: 1.5rem;
-      white-space: pre-wrap;
-      word-wrap: break-word;
-      overflow-x: auto;
-      border-radius: 0;
-      border: none;
-      line-height: 1.5;
-      tab-size: 4;
-    }
-    
-    .timestamp {
-      text-align: right;
-      padding: 0.5rem 1rem;
-      color: var(--text-muted);
-      font-size: 0.8rem;
-      border-top: 1px solid var(--border-color);
-    }
-    
-    #loading {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      height: 100vh;
-    }
-    
-    .loader {
-      width: 2.5rem;
-      height: 2.5rem;
-      border: 3px solid var(--text-muted);
-      border-bottom-color: var(--accent-color);
-      border-radius: 50%;
-      animation: spin 1s linear infinite;
-    }
-    
-    @keyframes spin {
-      to { transform: rotate(360deg); }
-    }
-
-    .syntax-badge {
-      background-color: var(--accent-color);
-      color: white;
-      padding: 0.2rem 0.5rem;
-      border-radius: 4px;
-      font-size: 0.8rem;
-      margin-left: 0.75rem;
-    }
-    
-    @media (max-width: 768px) {
-      .terminal-header {
-        flex-direction: column;
-        gap: 0.75rem;
-        align-items: flex-start;
-      }
-      
-      .terminal-info {
-        width: 100%;
-        overflow-x: auto;
-      }
-      
-      .theme-selector {
-        width: 100%;
-      }
-    }
-  </style>
+  <link rel="stylesheet" href="view.css">
+  <script src="common.js"></script>
+  <script src="view.js"></script>
 </head>
 <body>
   <div id="loading">
@@ -158,82 +45,87 @@
         <span class="user-host" id="user-host">user@host</span>
         <span class="working-dir" id="working-dir">~/path</span>
         <span class="command" id="command">$ command</span>
-        <span class="syntax-badge" id="syntax-badge">bash</span>
+        <span class="exit-code-badge" id="exit-code-badge" title="Command exit code">0</span>
+        <span class="syntax-badge" id="syntax-badge" title="Syntax highlighting">bash</span>
       </div>
       <select id="theme-selector" class="theme-selector">
+        <option value="1c-light">1C Light</option>
+        <option value="a11y-dark">A11Y Dark</option>
+        <option value="a11y-light">A11Y Light</option>
+        <option value="agate">Agate</option>
+        <option value="an-old-hope">An Old Hope</option>
+        <option value="androidstudio">Androidstudio</option>
+        <option value="arduino-light">Arduino Light</option>
+        <option value="arta">Arta</option>
+        <option value="ascetic">Ascetic</option>
         <option value="atom-one-dark">Atom One Dark</option>
+        <option value="atom-one-dark-reasonable">Atom One Dark Reasonable</option>
         <option value="atom-one-light">Atom One Light</option>
-        <option value="github-dark">GitHub Dark</option>
+        <option value="brown-paper">Brown Paper</option>
+        <option value="codepen-embed">Codepen Embed</option>
+        <option value="color-brewer">Color Brewer</option>
+        <option value="dark">Dark</option>
+        <option value="default">Default</option>
+        <option value="devibeans">Devibeans</option>
+        <option value="docco">Docco</option>
+        <option value="far">Far</option>
+        <option value="felipec">Felipec</option>
+        <option value="foundation">Foundation</option>
         <option value="github">GitHub Light</option>
+        <option value="github-dark">Github Dark</option>
+        <option value="github-dark-dimmed">Github Dark Dimmed</option>
+        <option value="gml">Gml</option>
+        <option value="googlecode">Googlecode</option>
+        <option value="gradient-dark">Gradient Dark</option>
+        <option value="gradient-light">Gradient Light</option>
+        <option value="grayscale">Grayscale</option>
+        <option value="hybrid">Hybrid</option>
+        <option value="idea">Idea</option>
+        <option value="intellij-light">Intellij Light</option>
+        <option value="ir-black">Ir Black</option>
+        <option value="isbl-editor-dark">Isbl Editor Dark</option>
+        <option value="isbl-editor-light">Isbl Editor Light</option>
+        <option value="kimbie-dark">Kimbie Dark</option>
+        <option value="kimbie-light">Kimbie Light</option>
+        <option value="lightfair">Lightfair</option>
+        <option value="lioshi">Lioshi</option>
+        <option value="magula">Magula</option>
+        <option value="mono-blue">Mono Blue</option>
         <option value="monokai">Monokai</option>
-        <option value="dracula">Dracula</option>
+        <option value="monokai-sublime">Monokai Sublime</option>
+        <option value="night-owl">Night Owl</option>
+        <option value="nnfx-dark">Nnfx Dark</option>
+        <option value="nnfx-light">Nnfx Light</option>
         <option value="nord">Nord</option>
+        <option value="obsidian">Obsidian</option>
+        <option value="panda-syntax-dark">Panda Syntax Dark</option>
+        <option value="panda-syntax-light">Panda Syntax Light</option>
+        <option value="paraiso-dark">Paraiso Dark</option>
+        <option value="paraiso-light">Paraiso Light</option>
+        <option value="pojoaque">Pojoaque</option>
+        <option value="purebasic">Purebasic</option>
+        <option value="qtcreator-dark">Qtcreator Dark</option>
+        <option value="qtcreator-light">Qtcreator Light</option>
+        <option value="rainbow">Rainbow</option>
+        <option value="routeros">Routeros</option>
+        <option value="school-book">School Book</option>
+        <option value="shades-of-purple">Shades Of Purple</option>
+        <option value="srcery">Srcery</option>
+        <option value="stackoverflow-dark">Stackoverflow Dark</option>
+        <option value="stackoverflow-light">Stackoverflow Light</option>
+        <option value="sunburst">Sunburst</option>
         <option value="tokyo-night-dark" selected>Tokyo Night</option>
-        <option value="vs2015">VS 2015</option>
+        <option value="tokyo-night-light">Tokyo Night Light</option>
+        <option value="tomorrow-night-blue">Tomorrow Night Blue</option>
+        <option value="tomorrow-night-bright">Tomorrow Night Bright</option>
+        <option value="vs">Vs</option>
+        <option value="vs2015">Vs2015</option>
+        <option value="xcode">Xcode</option>
+        <option value="xt256">Xt256</option>
       </select>
     </div>
     <pre><code id="output"></code></pre>
     <div class="timestamp" id="timestamp"></div>
   </div>
-
-  <script>
-    document.addEventListener('DOMContentLoaded', function() {
-      const pasteId = window.location.pathname.substring(1);
-      
-      if (!pasteId) {
-        showError('No paste ID provided');
-        return;
-      }
-      
-      fetch(`/api/paste/${pasteId}`)
-        .then(response => {
-          if (!response.ok) {
-            throw new Error('Paste not found');
-          }
-          return response.json();
-        })
-        .then(data => {
-          document.getElementById('user-host').textContent = data.hostname || 'user@host';
-          document.getElementById('working-dir').textContent = data.workingDir || '~';
-          document.getElementById('command').textContent = `$ ${data.command || 'unknown command'}`;
-          
-          const outputEl = document.getElementById('output');
-          outputEl.textContent = data.content;
-          
-          // Set the syntax highlighting class, default to bash if not specified
-          const syntax = data.syntax || 'bash';
-          outputEl.className = syntax;
-          
-          // Display the detected syntax in the badge
-          document.getElementById('syntax-badge').textContent = syntax;
-          
-          const date = new Date(data.timestamp);
-          document.getElementById('timestamp').textContent = `Created: ${date.toLocaleString()}`;
-          
-          // Apply syntax highlighting
-          hljs.highlightElement(outputEl);
-          
-          document.getElementById('loading').style.display = 'none';
-          document.getElementById('content').style.display = 'block';
-          
-          document.title = `tshare: ${data.command || 'Shared Terminal Output'}`;
-        })
-        .catch(error => {
-          showError(error.message);
-        });
-      
-      document.getElementById('theme-selector').addEventListener('change', function(e) {
-        const theme = e.target.value;
-        document.getElementById('highlight-theme').href = `https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/styles/${theme}.min.css`;
-      });
-    });
-    
-    function showError(message) {
-      document.getElementById('loading').style.display = 'none';
-      const errorEl = document.getElementById('error');
-      errorEl.textContent = message || 'An error occurred';
-      errorEl.style.display = 'block';
-    }
-  </script>
 </body>
 </html>

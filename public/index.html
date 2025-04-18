@@ -6,6 +6,8 @@
   <title>tshare - Terminal Output Sharing Tool</title>
   <meta name="description" content="Share your terminal output with beautiful syntax highlighting, instantly">
   <link rel="stylesheet" href="styles.css">
+  <script src="common.js"></script>
+  <script src="index.js"></script>
   <!-- Favicon could be added here -->
 </head>
 <body>
@@ -89,31 +91,5 @@ tshare -s python script.py</code></pre>
   <footer>
     Made with 💙 by <a href="https://mikkelrask.github.io" target="_blank">mikkelrask</a>
   </footer>
-
-  <script>
-    document.getElementById('copy-cmd').addEventListener('click', () => {
-      // Detect if the user is on macOS/Darwin
-      const isMac = navigator.platform.toLowerCase().includes('mac') || 
-                    navigator.userAgent.toLowerCase().includes('mac') ||
-                    navigator.userAgent.toLowerCase().includes('darwin');
-      
-      // Use different installation commands based on OS
-      const installCommand = isMac 
-        ? 'sudo curl -o /usr/local/bin/tshare https://raw.githubusercontent.com/mikkelrask/terminal-share/main/tshare && sudo chmod +x /usr/local/bin/tshare'
-        : 'curl -o ~/.local/bin/tshare https://tshare.porgy-ruler.ts.net/tshare && chmod +x ~/.local/bin/tshare';
-      
-      navigator.clipboard.writeText(installCommand);
-      const toast = document.getElementById('toast');
-      toast.textContent = '✓ Install command copied to clipboard - now paste it in your teminal!';
-      toast.classList.add('show');
-      setTimeout(() => toast.classList.remove('show'), 8000);
-    });
-
-    document.getElementById('theme-toggle').addEventListener('click', () => {
-      document.body.classList.toggle('light-theme');
-      const themeToggle = document.getElementById('theme-toggle');
-      themeToggle.textContent = document.body.classList.contains('light-theme') ? '☀️' : '🌙';
-    });
-  </script>
 </body>
 </html>

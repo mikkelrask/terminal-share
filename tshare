@@ -4,7 +4,8 @@
 
 set -e
 
-SERVER_URL="https://tshare.porgy-ruler.ts.net"
+#SERVER_URL="https://tshare.porgy-ruler.ts.net"
+SERVER_URL="http://localhost:3000"
 DEFAULT_SYNTAX="bash" 
 CLIPBOARD_CMD="wl-copy" # Use xclip if you are x11
 
@@ -253,7 +254,8 @@ upload_and_show_url() {
            \"command\": \"$ESCAPED_COMMAND\",
            \"hostname\": \"$HOSTNAME\",
            \"workingDir\": \"$ESCAPED_DIR\",
-           \"syntax\": \"$DEFAULT_SYNTAX\"
+           \"syntax\": \"$DEFAULT_SYNTAX\",
+           \"exitCode\": \"$(cat "$EXIT_CODE_FILE")\"
          }")
   
     # Extract URL from response
@@ -269,7 +271,6 @@ upload_and_show_url() {
     return 1
   fi
   
-  # Output the URL with better visibility
   echo ""  # Blank line before URL
   if [[ -t 1 ]]; then  # Check if stdout is a terminal
     echo -e "\e[1mShare URL: $URL\e[0m"  # Bold if terminal supports it
@@ -295,15 +296,10 @@ upload_and_show_url() {
 HOSTNAME=$(hostname)
 WORKING_DIR=$(pwd)
 
-# Run the command and capture output
 if [[ "$QUIET" == "true" ]]; then
   "$@" > "$OUTPUT_FILE" 2>&1
   echo $? > "$EXIT_CODE_FILE"
 else
-  echo "Running: $COMMAND_STR"
-  "$@" | tee "$OUTPUT_FILE"
+  { "$@" 2>&1 | tee "$OUTPUT_FILE"; }
   echo ${PIPESTATUS[0]} > "$EXIT_CODE_FILE"
 fi
-
-# Rest of the script will be handled by the exit trap
-
