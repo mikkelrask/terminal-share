@@ -5,7 +5,7 @@
 set -e
 
 SERVER_URL="https://tshare.porgy-ruler.ts.net"
-VERSION="1.1.0"
+VERSION="1.1.1"
 DEFAULT_SYNTAX="bash" 
 
 # Check for SSH session
@@ -54,11 +54,13 @@ show_help() {
   echo "  -u, --url URL         Specify server URL (default: $SERVER_URL)"
   echo "  -v, --version         Show version information"
   echo "  -su, --self-update    Check for updates and update the script"
+  echo "  -c, --clean           Strip ANSI escape sequences from command output"
   echo
   echo "Examples:"
   echo "  tshare ls -la                # Share output of ls -la"
   echo "  tshare -s python script.py   # Share with Python syntax highlighting"
   echo "  tshare -q ls -la             # Share output silently (only show URL)"
+  echo "  tshare -c pfetch             # Share pfetch output without ANSI color codes"
   exit 0
 }
 
@@ -216,6 +218,8 @@ detect_syntax() {
 USE_CLIPBOARD=true
 QUIET=false
 SYNTAX_SPECIFIED=false
+STRIP_ANSI=false  # Default to preserving ANSI codes
+
 while [[ $# -gt 0 ]]; do
   case "$1" in
     -h|--help)
@@ -236,6 +240,10 @@ while [[ $# -gt 0 ]]; do
       ;;
     -q|--quiet)
       QUIET=true
+      shift
+      ;;
+    -c|--clean)
+      STRIP_ANSI=true
       shift
       ;;
     -v|--version)
@@ -295,15 +303,45 @@ upload_and_show_url() {
   # Read content
   CONTENT=$(cat "$OUTPUT_FILE")
   
+  # Strip ANSI escape codes if requested
+  strip_ansi_codes() {
+    # Remove color codes and other terminal escape sequences
+    # This pattern matches most common ANSI escape sequences
+    sed 's/\x1b\[[0-9;]*[a-zA-Z]//g; s/\x1b(B//g; s/\x1b\[[0-9;]*m//g'
+  }
+  
+  if [[ "$STRIP_ANSI" == "true" ]]; then
+    CONTENT=$(echo "$CONTENT" | strip_ansi_codes)
+  fi
+  
   # Function to escape JSON strings
   escape_json() {
     local content="$1"
+    # More thorough JSON escaping
     content="${content//\\/\\\\}"         # Escape backslashes
     content="${content//\"/\\\"}"         # Escape double quotes
     content="${content//$'\n'/\\n}"       # Escape newlines
     content="${content//$'\t'/\\t}"       # Escape tabs
     content="${content//$'\r'/\\r}"       # Escape carriage returns
-    echo "$content"
+    # Handle additional special characters
+    content="${content//$'\f'/\\f}"       # Form feeds
+    content="${content//$'\b'/\\b}"       # Backspaces
+    # Handle control characters and other non-printable characters
+    local i=0
+    local char
+    local result=""
+    while [ $i -lt ${#content} ]; do
+      char="${content:$i:1}"
+      if [[ $(LC_CTYPE=C printf "%d" "'$char") -lt 32 ]]; then
+        # Convert control character to unicode escape sequence
+        printf -v hex_val "%04x" "'$char"
+        result+="\\u$hex_val"
+      else
+        result+="$char"
+      fi
+      ((i++))
+    done
+    echo "$result"
   }
   
   # Upload to the server
