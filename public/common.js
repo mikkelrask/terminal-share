@@ -20,8 +20,31 @@ document.addEventListener('DOMContentLoaded', function() {
   // Copy button functionality
   const copyBtn = document.getElementById('copy-cmd');
   if (copyBtn) {
-    copyBtn.addEventListener('click', function() {
-      const cmd = 'curl -o /usr/local/bin/tshare https://raw.githubusercontent.com/mikkelrask/terminal-share/main/tshare && chmod +x /usr/local/bin/tshare';
+    copyBtn.addEventListener('click', async function() { // Make async for userAgentData
+      let isMac = false;
+      if (navigator.userAgentData) {
+        try {
+          const uaData = await navigator.userAgentData.getHighEntropyValues(["platform"]);
+          isMac = uaData.platform === "macOS";
+        } catch (error) {
+          console.warn('Could not determine platform using userAgentData:', error);
+          // Assume non-macOS if detection fails
+        }
+      } else {
+        console.warn('navigator.userAgentData not supported, assuming non-macOS for install command.');
+        // Assume non-macOS if API is not supported
+      }
+      
+      const installUrl = 'https://tshare.porgy-ruler.ts.net/tshare'; // Use the correct URL
+      let cmd;
+      if (isMac) {
+        // macOS: Use sudo and /usr/local/bin
+        cmd = `sudo curl -o /usr/local/bin/tshare ${installUrl} && sudo chmod +x /usr/local/bin/tshare`;
+      } else {
+        // Other OS (Linux assumed): Use ~/.local/bin without sudo
+        cmd = `curl -o ~/.local/bin/tshare ${installUrl} && chmod +x ~/.local/bin/tshare`;
+      }
+      
       navigator.clipboard.writeText(cmd).then(() => {
         showToast('Install command copied to clipboard!');
       }).catch(() => {

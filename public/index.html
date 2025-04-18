@@ -8,7 +8,6 @@
   <link rel="stylesheet" href="styles.css">
   <script src="common.js"></script>
   <script src="index.js"></script>
-  <!-- Favicon could be added here -->
 </head>
 <body>
   <header class="sticky-header">
@@ -56,7 +55,7 @@
     <section id="usage" class="usage">
       <h2>How to Use</h2>
       <p>Download the client script and make it executable:</p>
-      <pre><code>curl -o ~/.local/bin/tshare https://tshare.porgy-ruler.ts.net/tshare
+      <pre><code id="install-command-example">curl -o ~/.local/bin/tshare https://tshare.porgy-ruler.ts.net/tshare
 chmod +x ~/.local/bin/tshare</code></pre>
       <p><small>note: If you get an error, you might need to prefix the commands with 'sudo' or similar to elevate your priveliges</small></p>
       <p>Then, simply prefix any command with <code>tshare</code> to share its output:</p>
@@ -89,7 +88,9 @@ tshare -s python script.py</code></pre>
   </main>
 
   <footer>
-    Made with 💙 by <a href="https://mikkelrask.github.io" target="_blank">mikkelrask</a> | 2025 <a href="https://github.com/mikkelrask/terminal-share/blob/master/LICENSE" target="_blank">BEER-WARE</a>
+    Made with 💙 by <a href="https://mikkelrask.github.io" target="_blank">mikkelrask</a>
   </footer>
+
+ 
 </body>
 </html>
