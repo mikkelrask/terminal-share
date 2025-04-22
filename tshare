@@ -4,7 +4,7 @@
 
 set -e
 
-SERVER_URL="https://tshare.porgy-ruler.ts.net"
+SERVER_URL="https://api-tshare.mikkelrask.pages.dev"
 VERSION="1.1.1"
 DEFAULT_SYNTAX="bash" 
 
