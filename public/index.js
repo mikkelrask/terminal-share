@@ -50,7 +50,7 @@ async function updateInstallCommandExample() {
   
   console.log(`OS detected as macOS: ${isMac}`); // Log final OS decision
   
-  const installUrl = 'https://tshare.porgy-ruler.ts.net/tshare'; // Use the correct URL
+  const installUrl = 'https://raw.githubusercontent.com/mikkelrask/terminal-share/refs/heads/main/tshare';
   let cmdText;
   if (isMac) {
     // macOS: Use sudo and /usr/local/bin
