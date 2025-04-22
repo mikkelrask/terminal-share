@@ -35,7 +35,7 @@ document.addEventListener('DOMContentLoaded', function() {
         // Assume non-macOS if API is not supported
       }
       
-      const installUrl = 'https://tshare.porgy-ruler.ts.net/tshare'; // Use the correct URL
+      const installUrl = 'https://raw.githubusercontent.com/mikkelrask/terminal-share/refs/heads/main/tshare'; // Use the correct URL
       let cmd;
       if (isMac) {
         // macOS: Use sudo and /usr/local/bin
