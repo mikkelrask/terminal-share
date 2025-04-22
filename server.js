@@ -6,7 +6,7 @@ const fs = require('fs');
 
 const app = express();
 const PORT = process.env.PORT || 3000;
-const VERSION = "1.1.1"; // Add server version
+const VERSION = "1.1.1"; 
 
 const STORAGE_DIR = path.join(__dirname, 'pastes');
 if (!fs.existsSync(STORAGE_DIR)) {
