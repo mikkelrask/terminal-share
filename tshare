@@ -4,7 +4,7 @@
 
 set -e
 
-SERVER_URL="https://api-tshare.mikkelrask.pages.dev"
+SERVER_URL="https://api.terminal-share.workers.dev"
 VERSION="1.1.1"
 DEFAULT_SYNTAX="bash" 
 
