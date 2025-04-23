@@ -47,7 +47,7 @@ async function loadPaste(pasteId) {
     document.getElementById('working-dir').textContent = data.workingDir || '~';
     document.getElementById('command').textContent = `$ ${data.command || ''}`;
     document.getElementById('exit-code-badge').textContent = data.exitCode || '0';
-    document.getElementById('exit-code-badge').classList.toggle('error', data.exitCode !== '0');
+    document.getElementById('exit-code-badge').classList.toggle('error', Number(data.exitCode) !== 0);
     
     // Set syntax badge and apply highlighting
     const syntax = data.syntax || 'bash'; // Default to bash if not specified
