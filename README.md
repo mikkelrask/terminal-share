@@ -51,7 +51,7 @@ Once the command completes, tshare will:
 - **Self hostable** - _Bring your own infrastructure_ for more privacy i.e in a work environment
 
 ### Example output
-[![The tshare source code shown in tshare](https://github.com/mikkelrask/terminal-share/blob/main/img/screenshot.png)](https://tshare.porgy-ruler.ts.net/d60367)
+[![The tshare source code shown in tshare](https://github.com/mikkelrask/terminal-share/blob/main/img/screenshot.png)](https://terminal-share.pages.dev/0f9804b0)
 
 ## Requirements 🧰
 
